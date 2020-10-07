@@ -50,6 +50,7 @@ def single_flowline_glacier_directory_with_calving(rgi_id, reset=False, prepro_b
     cfg.PATHS['working_dir'] = wd
     
     cfg.PARAMS['use_multiple_flowlines'] = False   # why NOT multiple flowlines? 
+    # -> maybe because of the glacier elevation bin approac of Rounce and Huss and Hock?!
     cfg.PARAMS['use_multiprocessing'] = False
     # Check if folder is already processed
     try:
