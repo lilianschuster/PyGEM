@@ -48,20 +48,22 @@ def single_flowline_glacier_directory_with_calving(rgi_id, reset=False, prepro_b
     wd = '/Users/davidrounce/Documents/Dave_Rounce/HiMAT/Output/oggm-pygem-{}-b{}-k{}'.format(rgi_id, prepro_border, 
                                                                                               k_calving)
     cfg.PATHS['working_dir'] = wd
-    cfg.PARAMS['use_multiple_flowlines'] = False
+    
+    cfg.PARAMS['use_multiple_flowlines'] = False   # why NOT multiple flowlines? 
     cfg.PARAMS['use_multiprocessing'] = False
     # Check if folder is already processed
     try:
         gdir = utils.GlacierDirectory(rgi_id)
         gdir.read_pickle('model_flowlines')
         # If the above works the directory is already processed, return
-        return gdir
+        return gdir   # why do we return here gdir,...  but then compute gdirs anyway?! 
     except:
         pass
     # If not ready, we download the preprocessed data for this glacier
     gdirs = workflow.init_glacier_regions([rgi_id],
                                           from_prepro_level=2,
                                           prepro_border=prepro_border)
+    # what is the difference between gdirs and gdir????
     if not gdirs[0].is_tidewater:
         raise ValueError('This glacier is not tidewater!')
     # Compute all the stuff
